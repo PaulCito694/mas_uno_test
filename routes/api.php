@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/categories', 'CategoryController@index');
-Route::post('/categories', 'CategoryController@store');
+Route::resource('categories', 'CategoryController', ['only' => ['index', 'store']]);
+Route::resource('products', 'ProductController', ['only' => ['store']]);
 

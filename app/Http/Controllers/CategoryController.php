@@ -33,16 +33,9 @@ class CategoryController extends Controller
                 'status' => 'in:1,0'
             ]);
 
-            $slug = Str::slug($request->input('name'));
-            $count = Category::where('slug', 'like', $slug . '%')->count();
-
-            if ($count > 0) {
-                $slug .= '-' . ($count + 1);
-            }
-
             $category = new Category();
             $category->name = $request->input('name');
-            $category->slug = $slug;
+            $category->slug = $this->slug_generator($request, 'categories');
             $category->status = $request->input('status', 1);
             $category->save();
 
