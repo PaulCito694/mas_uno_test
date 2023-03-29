@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('categories', 'CategoryController', ['only' => ['index', 'store']]);
 Route::resource('products', 'ProductController', ['only' => ['store']]);
 Route::get('/products/all/{perPage?}', 'ProductController@index');
+Route::get('/categories/with-products/{order?}', 'CategoryController@getCategoriesWithProducts');
