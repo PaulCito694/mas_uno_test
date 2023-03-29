@@ -40,4 +40,11 @@ class ProductController extends Controller
             ], 422);
         }
     }
+
+    public function index($perPage = 10)
+    {
+        $products = Product::select('id', 'name', 'slug')->paginate($perPage);
+
+        return response()->json($products);
+    }
 }
