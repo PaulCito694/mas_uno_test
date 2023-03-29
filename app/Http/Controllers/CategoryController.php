@@ -33,17 +33,17 @@ class CategoryController extends Controller
                 'status' => 'in:1,0'
             ]);
 
-            $slug = Str::slug($request->input('name')); // Generar el slug a partir del nombre
-            $count = Category::where('slug', 'like', $slug . '%')->count(); // Contar las coincidencias
+            $slug = Str::slug($request->input('name'));
+            $count = Category::where('slug', 'like', $slug . '%')->count();
 
             if ($count > 0) {
-                $slug .= '-' . ($count + 1); // Agregar un número al final del slug
+                $slug .= '-' . ($count + 1);
             }
 
             $category = new Category();
             $category->name = $request->input('name');
             $category->slug = $slug;
-            $category->status = $request->input('status', 1); // Opcional: valor predeterminado para el estado
+            $category->status = $request->input('status', 1);
             $category->save();
 
             return response()->json([
